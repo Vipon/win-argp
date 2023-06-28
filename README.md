@@ -3,7 +3,7 @@ Cross platform analog for gnulin argp. The main goal is to make programs more
 portable to Windows operation system.
 
 * getopt - sources taken from FreeBSD
-* argp - sources taken from gnulib
+* argp - sources taken from argp-standalone project
 
 ## Configure and Build
 ### Build with Visual Studio

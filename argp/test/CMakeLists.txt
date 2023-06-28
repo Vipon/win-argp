@@ -20,34 +20,14 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-set(ARGP_SOURCES
-    argp-parse.c
-    argp-help.c
-    argp-fmtstream.c
-    argp-bug-address.c
-    argp-program-version.c
-    argp-error-exit-status.c
+add_executable(argp-test
+    argp-test.c
 )
 
-set(ARGP_HEADERS
-    argp.h
-    argp-namefrob.h
-    argp-fmtstream.h
-    gettext.h
-    sysexits.h
+target_link_libraries(argp-test PUBLIC argp string_helper)
+
+add_test(
+    NAME test-argp
+    COMMAND ./argp-test
 )
-
-add_library(argp ${WIN_ARGP_LIB_TYPE}
-    ${ARGP_SOURCES}
-    ${ARGP_HEADERS}
-)
-
-target_include_directories(argp PUBLIC ${CMAKE_CURRENT_LIST_DIR})
-target_link_libraries(argp PUBLIC getopt string_helper)
-
-if (NOT MSVC)
-    target_compile_options(argp PRIVATE "-Wno-deprecated-declarations")
-endif()
-
-add_subdirectory(test)
 

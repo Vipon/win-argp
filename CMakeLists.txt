@@ -27,5 +27,15 @@ project(win-argp
   VERSION 1.0
 )
 
+if (WIN32)
+    set(WIN_ARGP_LIB_TYPE STATIC)
+else (WIN32)
+    set(WIN_ARGP_LIB_TYPE SHARED)
+endif (WIN32)
+
+include(CTest)
+
 add_subdirectory(getopt)
+add_subdirectory(string_helper)
+add_subdirectory(argp)
 

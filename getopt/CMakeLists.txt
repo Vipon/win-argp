@@ -29,7 +29,7 @@ set(GETOPT_HEADERS
     getopt.h
 )
 
-add_library(getopt SHARED
+add_library(getopt ${WIN_ARGP_LIB_TYPE}
     ${GETOPT_SOURCES}
     ${GETOPT_HEADERS}
 )
