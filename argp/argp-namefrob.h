@@ -122,9 +122,9 @@
 # define putchar_unlocked(x) putchar (x)
 # endif
 
-extern char *__argp_basename (char *name);
+extern char *__argp_basename(char *name);
 
 #endif /* !_LIBC */
 
-extern char *__argp_short_program_name (void);
+extern const char *__argp_short_program_name(void);
 

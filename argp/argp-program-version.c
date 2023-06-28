@@ -30,5 +30,5 @@ const char *argp_program_version;
    this function with a stream to print the version to and a pointer to the
    current parsing state, and then exits (unless the ARGP_NO_EXIT flag is
    used).  This variable takes precedent over ARGP_PROGRAM_VERSION.  */
-void (*argp_program_version_hook) (FILE *stream, struct argp_state *state);
+void (*argp_program_version_hook)(FILE *stream, struct argp_state *state);
 

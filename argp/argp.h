@@ -132,7 +132,7 @@ struct argp_state;      /* " */
 struct argp_child;      /* " */
 
 /* The type of a pointer to an argp parsing function.  */
-typedef error_t (*argp_parser_t) (int __key, char *__arg,
+typedef error_t (*argp_parser_t)(int __key, char *__arg,
                     struct argp_state *__state);
 
 /* What to return for unrecognized keys.  For special ARGP_KEY_ keys, such
@@ -329,7 +329,7 @@ struct argp_state
 
     /* The name used when printing messages.  This is initialized to ARGV[0],
         or PROGRAM_INVOCATION_NAME if that is unavailable.  */
-    char *name;
+    const char *name;
 
     /* Streams used when argp prints something.  */
     FILE *err_stream;     /* For errors; initialized to stderr. */
@@ -389,7 +389,7 @@ struct argp_state
    routine returned a non-zero value, it is returned; otherwise 0 is
    returned.  This function may also call exit unless the ARGP_NO_HELP flag
    is set.  INPUT is a pointer to a value to be passed in to the parser.  */
-error_t argp_parse (const struct argp *__restrict argp,
+error_t argp_parse(const struct argp *__restrict argp,
                     int argc, char **__restrict argv,
                     unsigned flags, int *__restrict arg_index,
                     void *__restrict input);
@@ -411,7 +411,7 @@ extern const char *argp_program_version;
    calls this function with a stream to print the version to and a pointer to
    the current parsing state, and then exits (unless the ARGP_NO_EXIT flag is
    used).  This variable takes precedent over ARGP_PROGRAM_VERSION.  */
-extern void (*argp_program_version_hook) (FILE *__restrict __stream,
+extern void (*argp_program_version_hook)(FILE *__restrict __stream,
                     struct argp_state *__restrict
                     __state);
 
@@ -458,10 +458,10 @@ extern error_t argp_err_exit_status;
 
 /* Output a usage message for ARGP to STREAM.  FLAGS are from the set
    ARGP_HELP_*.  */
-extern void argp_help (const struct argp *__restrict __argp,
+extern void argp_help(const struct argp *__restrict __argp,
                 FILE *__restrict __stream,
                 unsigned __flags, char *__restrict __name);
-extern void __argp_help (const struct argp *__restrict __argp,
+extern void __argp_help(const struct argp *__restrict __argp,
                 FILE *__restrict __stream, unsigned __flags,
                 char *__name);
 
@@ -475,19 +475,19 @@ extern void __argp_help (const struct argp *__restrict __argp,
 
 /* Output, if appropriate, a usage message for STATE to STREAM.  FLAGS are
    from the set ARGP_HELP_*.  */
-extern void argp_state_help (const struct argp_state *__restrict __state,
+extern void argp_state_help(const struct argp_state *__restrict __state,
                     FILE *__restrict __stream,
                     unsigned int __flags);
-extern void __argp_state_help (const struct argp_state *__restrict __state,
+extern void __argp_state_help(const struct argp_state *__restrict __state,
                     FILE *__restrict __stream,
                     unsigned int __flags);
 
 /* If appropriate, print the printf string FMT and following args, preceded
    by the program name and `:', to stderr, and followed by a `Try ... --help'
    message, then exit (1).  */
-extern void argp_error (const struct argp_state *__restrict __state,
+extern void argp_error(const struct argp_state *__restrict __state,
                 const char *__restrict __fmt, ...);
-extern void __argp_error (const struct argp_state *__restrict __state,
+extern void __argp_error(const struct argp_state *__restrict __state,
                 const char *__restrict __fmt, ...);
 
 /* Similar to the standard gnu error-reporting function error(), but will
@@ -498,19 +498,19 @@ extern void __argp_error (const struct argp_state *__restrict __state,
    difference between this function and argp_error is that the latter is for
    *parsing errors*, and the former is for other problems that occur during
    parsing but don't reflect a (syntactic) problem with the input.  */
-extern void argp_failure (const struct argp_state *__restrict __state,
+extern void argp_failure(const struct argp_state *__restrict __state,
                 int __status, int __errnum,
                 const char *__restrict __fmt, ...);
-extern void __argp_failure (const struct argp_state *__restrict __state,
+extern void __argp_failure(const struct argp_state *__restrict __state,
                 int __status, int __errnum,
                 const char *__restrict __fmt, ...);
 
 /* Return the input field for ARGP in the parser corresponding to STATE; used
    by the help routines.  */
-extern void *_argp_input (const struct argp *__restrict __argp,
+extern void *_argp_input(const struct argp *__restrict __argp,
                 const struct argp_state *__restrict __state)
      __THROW;
-extern void *__argp_input (const struct argp *__restrict __argp,
+extern void *__argp_input(const struct argp *__restrict __argp,
                 const struct argp_state *__restrict __state)
      __THROW;
 
@@ -525,27 +525,27 @@ extern void *__argp_input (const struct argp *__restrict __argp,
 
 /* Possibly output the standard usage message for ARGP to stderr and exit.  */
 ARGP_EI void
-__argp_usage (const struct argp_state *__state)
+__argp_usage(const struct argp_state *__state)
 {
-    __argp_state_help (__state, stderr, ARGP_HELP_STD_USAGE);
+    __argp_state_help(__state, stderr, ARGP_HELP_STD_USAGE);
 }
 
 /* Returns true if the option OPT is a valid short option.  */
 ARGP_EI int
-__NTH (__option_is_short (const struct argp_option *__opt))
+__NTH(__option_is_short(const struct argp_option *__opt))
 {
     if (__opt->flags & OPTION_DOC)
         return 0;
     else {
         int __key = __opt->key;
-        return __key > 0 && __key <= UCHAR_MAX && isprint (__key);
+        return __key > 0 && __key <= UCHAR_MAX && isprint(__key);
     }
 }
 
 /* Returns true if the option OPT is in fact the last (unused) entry in an
    options array.  */
 ARGP_EI int
-__NTH (__option_is_end (const struct argp_option *__opt))
+__NTH(__option_is_end(const struct argp_option *__opt))
 {
     return !__opt->key && !__opt->name && !__opt->doc && !__opt->group;
 }

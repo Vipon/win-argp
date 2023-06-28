@@ -24,7 +24,7 @@ add_executable(argp-test
     argp-test.c
 )
 
-target_link_libraries(argp-test PUBLIC argp string_helper)
+target_link_libraries(argp-test PUBLIC argp)
 
 add_test(
     NAME test-argp

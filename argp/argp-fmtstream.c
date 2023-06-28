@@ -43,8 +43,8 @@
    Otherwise, chars beyond RMARGIN are simply dropped until a newline.
    Returns NULL if there was an error.  */
 argp_fmtstream_t
-__argp_make_fmtstream (FILE *stream,
-            size_t lmargin, size_t rmargin, ssize_t wmargin)
+__argp_make_fmtstream(FILE *stream,
+        size_t lmargin, size_t rmargin, ssize_t wmargin)
 {
     argp_fmtstream_t fs;
 
@@ -73,9 +73,9 @@ __argp_make_fmtstream (FILE *stream,
 
 /* Flush FS to its stream, and free it (but don't close the stream).  */
 void
-__argp_fmtstream_free (argp_fmtstream_t fs)
+__argp_fmtstream_free(argp_fmtstream_t fs)
 {
-    __argp_fmtstream_update (fs);
+    __argp_fmtstream_update(fs);
     if (fs->p > fs->buf) {
         fwrite(fs->buf, 1, fs->p - fs->buf, fs->stream);
     }
@@ -87,7 +87,7 @@ __argp_fmtstream_free (argp_fmtstream_t fs)
 /* Process FS's buffer so that line wrapping is done from POINT_OFFS to the
    end of its buffer.  This code is mostly from glibc stdio/linewrap.c.  */
 void
-__argp_fmtstream_update (argp_fmtstream_t fs)
+__argp_fmtstream_update(argp_fmtstream_t fs)
 {
     char *buf, *nl;
     size_t len;
@@ -173,16 +173,16 @@ __argp_fmtstream_update (argp_fmtstream_t fs)
             int i;
 
             p = buf + (r + 1 - fs->point_col);
-            while (p >= buf && !isblank (*p))
+            while (p >= buf && !isblank(*p))
                 --p;
             nextline = p + 1; /* This will begin the next line.  */
 
             if (nextline > buf) {
                 /* Swallow separating blanks.  */
                 if (p >= buf)
-                do
-                --p;
-                while (p >= buf && isblank (*p));
+                    do
+                        --p;
+                    while (p >= buf && isblank(*p));
                 nl = p + 1;   /* The newline will replace the first blank. */
             } else {
                 /* A single word that is greater than the maximum line width.
@@ -191,7 +191,7 @@ __argp_fmtstream_update (argp_fmtstream_t fs)
                 /* Find the end of the long word.  */
                 do
                     ++p;
-                while (p < nl && !isblank (*p));
+                while (p < nl && !isblank(*p));
 
                 if (p == nl) {
                     /* It already ends a line.  No fussing required.  */
@@ -204,7 +204,7 @@ __argp_fmtstream_update (argp_fmtstream_t fs)
                 /* Swallow separating blanks.  */
                 do
                     ++p;
-                while (isblank (*p));
+                while (isblank(*p));
 
                 /* The next line will start here.  */
                 nextline = p;
@@ -218,8 +218,7 @@ __argp_fmtstream_update (argp_fmtstream_t fs)
             if ((nextline == buf + len + 1
                 ? fs->end - nl < fs->wmargin + 1
                 : nextline - (nl + 1) < fs->wmargin)
-                && fs->p > nextline)
-            {
+                && fs->p > nextline) {
                 /* The margin needs more blanks than we removed.  */
                 if (fs->end - fs->p > fs->wmargin + 1) {
                     /* Make some space for them.  */
@@ -277,13 +276,13 @@ __argp_fmtstream_update (argp_fmtstream_t fs)
 /* Ensure that FS has space for AMOUNT more bytes in its buffer, either by
    growing the buffer, or by flushing it.  True is returned iff we succeed. */
 int
-__argp_fmtstream_ensure (struct argp_fmtstream *fs, size_t amount)
+__argp_fmtstream_ensure(struct argp_fmtstream *fs, size_t amount)
 {
     if ((size_t) (fs->end - fs->p) < amount) {
         ssize_t wrote;
 
         /* Flush FS's buffer.  */
-        __argp_fmtstream_update (fs);
+        __argp_fmtstream_update(fs);
 
         wrote = fwrite(fs->buf, 1, fs->p - fs->buf, fs->stream);
         if (wrote == fs->p - fs->buf) {
@@ -302,7 +301,7 @@ __argp_fmtstream_ensure (struct argp_fmtstream *fs, size_t amount)
             size_t new_size = old_size + amount;
             char *new_buf;
 
-            if (new_size < old_size || ! (new_buf = realloc (fs->buf, new_size))) {
+            if (new_size < old_size || ! (new_buf = realloc(fs->buf, new_size))) {
                 errno = ENOMEM;
                 return 0;
             }
@@ -317,30 +316,28 @@ __argp_fmtstream_ensure (struct argp_fmtstream *fs, size_t amount)
 }
 
 ssize_t
-__argp_fmtstream_printf (struct argp_fmtstream *fs, const char *fmt, ...)
+__argp_fmtstream_printf(struct argp_fmtstream *fs, const char *fmt, ...)
 {
-  int out;
-  size_t avail;
-  size_t size_guess = PRINTF_SIZE_GUESS; /* How much space to reserve. */
+    int out;
+    size_t avail;
+    size_t size_guess = PRINTF_SIZE_GUESS; /* How much space to reserve. */
 
-  do
-    {
-      va_list args;
+    do {
+        va_list args;
 
-      if (! __argp_fmtstream_ensure (fs, size_guess))
-    return -1;
+        if (!__argp_fmtstream_ensure(fs, size_guess))
+            return -1;
 
-      va_start (args, fmt);
-      avail = fs->end - fs->p;
-      out = vsnprintf (fs->p, avail, fmt, args);
-      va_end (args);
-      if ((size_t) out >= avail)
-    size_guess = out + 1;
-    }
-  while ((size_t) out >= avail);
+        va_start (args, fmt);
+        avail = fs->end - fs->p;
+        out = vsnprintf(fs->p, avail, fmt, args);
+        va_end (args);
+        if ((size_t) out >= avail)
+            size_guess = out + 1;
+    } while ((size_t) out >= avail);
 
-  fs->p += out;
+    fs->p += out;
 
-  return out;
+    return out;
 }
 
