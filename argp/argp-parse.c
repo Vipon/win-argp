@@ -109,7 +109,7 @@ argp_default_parser (int key, char *arg, struct argp_state *state)
         break;
 
     case OPT_PROGNAME:      /* Set the program name.  */
-#if 0 || HAVE_DECL_PROGRAM_INVOCATION_NAME
+#if 0 || HAVE_DECL_PROGRAM_INVOCATION_NAMEF
         program_invocation_name = arg;
 #endif
         /* [Note that some systems only have PROGRAM_INVOCATION_SHORT_NAME (aka
@@ -492,9 +492,9 @@ parser_init (struct parser *parser, const struct argp *argp,
     return ENOMEM;
 
   parser->groups = parser->storage;
-  parser->child_inputs = parser->storage + GLEN;
-  parser->long_opts = parser->storage + GLEN + CLEN;
-  parser->short_opts = parser->storage + GLEN + CLEN + LLEN;
+  parser->child_inputs = (void*)((size_t)(parser->storage) + GLEN);
+  parser->long_opts = (struct option*)((size_t)(parser->storage) + GLEN + CLEN);
+  parser->short_opts = (char*)((size_t)(parser->storage) + GLEN + CLEN + LLEN);
 
   memset (parser->child_inputs, 0, szs.num_child_inputs * sizeof (void *));
   parser_convert (parser, argp, flags);

@@ -26,7 +26,6 @@
 
 void *mempcpy(void *dest, const void *src, size_t len)
 {
-    return memcpy(dest, src, len) + len;
+    return (void*)((size_t)memcpy(dest, src, len) + len);
 }
-
 
