@@ -12,6 +12,7 @@ mkdir build
 cd build
 cmake ..
 cmake --build .
+ctest -C Debug
 ```
 
 ### Build with Ninja
@@ -20,6 +21,7 @@ mkdir build
 cd build
 cmake -G Ninja ..
 ninja
+ninja test
 ```
 
 ## Support build setup
