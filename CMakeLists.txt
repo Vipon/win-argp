@@ -35,6 +35,8 @@ endif (WIN32)
 
 include(CTest)
 
+include_directories(include)
+
 add_subdirectory(getopt)
 add_subdirectory(string_helper)
 add_subdirectory(getprogname)

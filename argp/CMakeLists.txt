@@ -33,8 +33,6 @@ set(ARGP_HEADERS
     argp.h
     argp-namefrob.h
     argp-fmtstream.h
-    gettext.h
-    sysexits.h
 )
 
 add_library(argp ${WIN_ARGP_LIB_TYPE}
