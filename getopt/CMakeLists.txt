@@ -29,10 +29,11 @@ set(GETOPT_HEADERS
     getopt.h
 )
 
-add_library(getopt
+add_library(getopt SHARED
     ${GETOPT_SOURCES}
     ${GETOPT_HEADERS}
 )
 
 target_include_directories(getopt PUBLIC ${CMAKE_CURRENT_LIST_DIR})
+target_compile_options(getopt PRIVATE "-Wno-deprecated-declarations")
 
