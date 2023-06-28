@@ -18,25 +18,20 @@
 # AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
+# SOFTWARE
 
-cmake_minimum_required(VERSION 3.15)
-
-project(win-argp
-  LANGUAGES C
-  VERSION 1.0
+set(GETPROGNAME_SOURCES
+    getprogname.c
 )
 
-if (WIN32)
-    set(WIN_ARGP_LIB_TYPE STATIC)
-else (WIN32)
-    set(WIN_ARGP_LIB_TYPE SHARED)
-endif (WIN32)
+set(GETPROGNAME_HEADERS
+    getprogname.h
+)
 
-include(CTest)
+add_library(getprogname ${WIN_ARGP_LIB_TYPE}
+    ${GETPROGNAME_SOURCES}
+    ${GETPROGNAME_HEADERS}
+)
 
-add_subdirectory(getopt)
-add_subdirectory(string_helper)
-add_subdirectory(getprogname)
-add_subdirectory(argp)
+target_include_directories(getprogname PUBLIC ${CMAKE_CURRENT_LIST_DIR})
 

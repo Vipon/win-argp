@@ -43,7 +43,7 @@ add_library(argp ${WIN_ARGP_LIB_TYPE}
 )
 
 target_include_directories(argp PUBLIC ${CMAKE_CURRENT_LIST_DIR})
-target_link_libraries(argp PUBLIC getopt string_helper)
+target_link_libraries(argp PUBLIC getopt string_helper getprogname)
 
 if (NOT MSVC)
     target_compile_options(argp PRIVATE "-Wno-deprecated-declarations")
