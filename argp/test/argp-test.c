@@ -15,6 +15,8 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
+#include "config.h"
+
 #include "argp.h"
 
 #include <stdio.h>
@@ -25,14 +27,6 @@
 # include "string_helper.h"
 #else
 # include <strings.h>
-#endif
-
-#ifndef FALLTHROUGH
-# if (__GNUC__ >= 7) || (__clang_major__ >= 10)
-#  define FALLTHROUGH __attribute__ ((__fallthrough__))
-# else
-#  define FALLTHROUGH ((void) 0)
-# endif
 #endif
 
 /* Define to the full name of this package. */

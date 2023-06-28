@@ -20,18 +20,33 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-add_executable(argp-test
-    argp-test.c
+add_executable(test-getopt-posix
+    test-getopt-posix.c
 )
 
-target_link_libraries(argp-test PUBLIC argp)
+target_link_libraries(test-getopt-posix PUBLIC getopt)
+target_include_directories(test-getopt-posix PUBLIC ${CMAKE_CURRENT_LIST_DIR})
+if (NOT MSVC)
+    target_compile_options(test-getopt-posix PRIVATE "-Wno-deprecated-declarations")
+endif()
 
 add_test(
-    NAME test-argp
-    COMMAND ./argp-test
+    NAME test-getopt-posix
+    COMMAND ./test-getopt-posix
 )
 
+add_executable(test-getopt-gnu
+    test-getopt-gnu.c
+)
+
+target_link_libraries(test-getopt-gnu PUBLIC getopt)
+target_include_directories(test-getopt-gnu PUBLIC ${CMAKE_CURRENT_LIST_DIR})
 if (NOT MSVC)
-    target_compile_options(argp-test PRIVATE "-Wno-deprecated-declarations")
+    target_compile_options(test-getopt-gnu PRIVATE "-Wno-deprecated-declarations")
 endif()
+
+add_test(
+    NAME test-getopt-gnu
+    COMMAND ./test-getopt-gnu
+)
 

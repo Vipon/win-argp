@@ -39,3 +39,5 @@ if (NOT MSVC)
     target_compile_options(getopt PRIVATE "-Wno-deprecated-declarations")
 endif()
 
+add_subdirectory(test)
+
