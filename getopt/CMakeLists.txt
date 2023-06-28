@@ -35,5 +35,7 @@ add_library(getopt SHARED
 )
 
 target_include_directories(getopt PUBLIC ${CMAKE_CURRENT_LIST_DIR})
-target_compile_options(getopt PRIVATE "-Wno-deprecated-declarations")
+if (NOT MSVC)
+    target_compile_options(getopt PRIVATE "-Wno-deprecated-declarations")
+endif()
 
