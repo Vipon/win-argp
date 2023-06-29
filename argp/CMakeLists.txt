@@ -40,12 +40,31 @@ add_library(argp ${WIN_ARGP_LIB_TYPE}
     ${ARGP_HEADERS}
 )
 
-target_include_directories(argp PUBLIC ${CMAKE_CURRENT_LIST_DIR})
+if (WIN32)
+    set(ARGP_DLL_BUILD_DIR "${CMAKE_CURRENT_BINARY_DIR}")
+    if (MSVC)
+        set(ARGP_DLL_BUILD_DEBUG_DIR "${ARGP_DLL_BUILD_DIR}/Debug")
+        set(ARGP_DLL_BUILD_RELEASE_DIR "${ARGP_DLL_BUILD_DIR}/Release")
+    endif (MSVC)
+endif (WIN32)
+
+target_include_directories(argp PUBLIC "${CMAKE_CURRENT_LIST_DIR}")
 target_link_libraries(argp PUBLIC getopt string_helper getprogname)
+target_compile_definitions(argp PRIVATE WIN_ARGP_DLL_COMPILE)
 
 if (NOT MSVC)
     target_compile_options(argp PRIVATE "-Wno-deprecated-declarations")
 endif()
 
 add_subdirectory(test)
+
+install(
+    TARGETS argp
+    DESTINATION "${WIN_ARGP_INSTALL_PREFIX}/lib"
+)
+
+install(
+    FILES argp.h
+    DESTINATION "${WIN_ARGP_INSTALL_PREFIX}/include"
+)
 

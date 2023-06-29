@@ -24,11 +24,18 @@ add_executable(argp-test
     argp-test.c
 )
 
-target_link_libraries(argp-test PUBLIC argp)
+target_link_libraries(argp-test argp)
 
 add_test(
     NAME test-argp
     COMMAND ./argp-test
+)
+
+#message(FATAL_ERROR ${ARGP_DLL_BUILD_DEBUG_DIR})
+set_property(
+    TEST test-argp
+    PROPERTY
+        ENVIRONMENT "PATH=%PATH%\;${ARGP_DLL_BUILD_DIR}\;${ARGP_DLL_BUILD_DEBUG_DIR}\;${ARGP_DLL_BUILD_RELEASE_DIR}"
 )
 
 if (NOT MSVC)

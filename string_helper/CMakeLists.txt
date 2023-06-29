@@ -30,7 +30,7 @@ set(STRING_HELPER_HEADERS
     string_helper.h
 )
 
-add_library(string_helper ${WIN_ARGP_LIB_TYPE}
+add_library(string_helper STATIC
     ${STRING_HELPER_SOURCES}
     ${STRING_HELPER_HEADERS}
 )

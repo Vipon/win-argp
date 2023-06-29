@@ -27,11 +27,13 @@ project(win-argp
   VERSION 1.0
 )
 
-if (WIN32)
-    set(WIN_ARGP_LIB_TYPE STATIC)
-else (WIN32)
+if (NOT WIN_ARGP_INSTALL_PREFIX)
+    set(WIN_ARGP_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/win-argp")
+endif (NOT WIN_ARGP_INSTALL_PREFIX)
+
+if (NOT WIN_ARGP_LIB_TYPE)
     set(WIN_ARGP_LIB_TYPE SHARED)
-endif (WIN32)
+endif (NOT WIN_ARGP_LIB_TYPE)
 
 include(CTest)
 

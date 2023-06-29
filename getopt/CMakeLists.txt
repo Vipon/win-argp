@@ -29,7 +29,7 @@ set(GETOPT_HEADERS
     getopt.h
 )
 
-add_library(getopt ${WIN_ARGP_LIB_TYPE}
+add_library(getopt STATIC
     ${GETOPT_SOURCES}
     ${GETOPT_HEADERS}
 )
@@ -40,4 +40,9 @@ if (NOT MSVC)
 endif()
 
 add_subdirectory(test)
+
+install(
+    FILES getopt.h
+    DESTINATION "${WIN_ARGP_INSTALL_PREFIX}/include"
+)
 

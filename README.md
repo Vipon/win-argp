@@ -5,23 +5,25 @@ portable to Windows operation system.
 * getopt - sources taken from FreeBSD
 * argp - sources taken from argp-standalone project
 
-## Configure and Build
-### Build with Visual Studio
+## Configure, Build and Install
+### With Visual Studio
 ```
 mkdir build
 cd build
 cmake ..
-cmake --build .
-ctest -C Debug
+cmake --build . --config Release
+ctest -C Release
+cmake --install . --config Release
 ```
 
-### Build with Ninja
+### With Ninja
 ```
 mkdir build
 cd build
 cmake -G Ninja ..
 ninja
 ninja test
+ninja install
 ```
 
 ## Support build setup

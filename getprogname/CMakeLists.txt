@@ -28,7 +28,7 @@ set(GETPROGNAME_HEADERS
     getprogname.h
 )
 
-add_library(getprogname ${WIN_ARGP_LIB_TYPE}
+add_library(getprogname STATIC
     ${GETPROGNAME_SOURCES}
     ${GETPROGNAME_HEADERS}
 )

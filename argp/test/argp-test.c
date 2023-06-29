@@ -188,7 +188,7 @@ group2_1_parser (int key, char *arg, struct argp_state *state)
     struct test_args *args = state->input;
     switch (key) {
     case 'p':
-    case 'e':
+    case 'l':
         args->group_2_1_option = key;
         break;
     default:
