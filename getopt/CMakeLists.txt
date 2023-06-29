@@ -34,6 +34,7 @@ add_library(getopt STATIC
     ${GETOPT_HEADERS}
 )
 
+target_link_libraries(getopt PUBLIC getprogname)
 target_include_directories(getopt PUBLIC ${CMAKE_CURRENT_LIST_DIR})
 if (NOT MSVC)
     target_compile_options(getopt PRIVATE "-Wno-deprecated-declarations")

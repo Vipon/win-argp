@@ -31,7 +31,6 @@ add_test(
     COMMAND ./argp-test
 )
 
-#message(FATAL_ERROR ${ARGP_DLL_BUILD_DEBUG_DIR})
 set_property(
     TEST test-argp
     PROPERTY

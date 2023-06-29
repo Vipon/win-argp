@@ -26,8 +26,11 @@
 #define __CONFIG_H
 
 #ifdef _WIN32
-# include <Windows.h>
+# include <io.h>
+# include <stdio.h>
 # include <stdlib.h>
+# include <Windows.h>
+
 static inline
 int setenv(const char *name, const char *value, int overwrite)
 {
@@ -48,7 +51,14 @@ int unsetenv(const char *name)
 {
     return _putenv_s(name, "");
 }
+
+# ifndef STDERR_FILENO
+#  define STDERR_FILENO _fileno(stderr)
+# endif /* STDERR_FILENO */
+#else /* _WIN32 */
+# include <unistd.h>
 #endif /* _WIN32 */
+
 #if __GNUC__ >= 3 || (__GNUC__ == 2 && __GNUC_MINOR__ >= 7)
 # define _GL_UNUSED __attribute__ ((__unused__))
 #else

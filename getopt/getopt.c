@@ -31,21 +31,12 @@
  * SUCH DAMAGE.
  */
 
+#include "config.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-#ifdef _WIN32
-#include <Windows.h>
-
-static char* getprogname()
-{
-    static char progname[MAX_PATH] = "";
-    GetModuleFileNameA(NULL, progname, MAX_PATH);
-
-    return progname;
-}
-#endif /* _WIN32 */
+#include <getprogname.h>
 
 int opterr = 1, /* if error message should be printed */
     optind = 1, /* index into parent argv vector */

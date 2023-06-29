@@ -25,13 +25,6 @@ SIGNATURE_CHECK(getopt, int, (int, char * const[], char const *));
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#ifdef _WIN32
-# include <io.h>
-# include <stdio.h>
-# define STDERR_FILENO _fileno(stderr)
-#else /* _WIN32 */
-# include <unistd.h>
-#endif /* _WIN32 */
 
 /* This test intentionally remaps stderr.  So, we arrange to have fd 10
    (outside the range of interesting fd's during the test) set up to
