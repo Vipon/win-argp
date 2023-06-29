@@ -25,6 +25,9 @@
 #else /* _WIN32 */
 # include <alloca.h>
 # include <strings.h>
+# ifndef __GLIBC__
+#  include "string_helper.h"
+# endif /* __GLIBC__ */
 #endif /* _WIN32 */
 
 #include <stdbool.h>

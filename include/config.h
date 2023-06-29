@@ -55,8 +55,14 @@ int unsetenv(const char *name)
 # ifndef STDERR_FILENO
 #  define STDERR_FILENO _fileno(stderr)
 # endif /* STDERR_FILENO */
+
+# define DLLEXPORT __declspec(dllexport)
+# define DLLIMPORT __declspec(dllimport)
 #else /* _WIN32 */
 # include <unistd.h>
+
+# define DLLEXPORT
+# define DLLIMPORT
 #endif /* _WIN32 */
 
 #if __GNUC__ >= 3 || (__GNUC__ == 2 && __GNUC_MINOR__ >= 7)
@@ -78,3 +84,4 @@ int unsetenv(const char *name)
 #endif
 
 #endif /* __CONFIG_H */
+

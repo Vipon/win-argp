@@ -20,6 +20,8 @@
 #ifndef _ARGP_H
 #define _ARGP_H
 
+#include "config.h"
+
 #include <stdio.h>
 #include <ctype.h>
 #include <getopt.h>
@@ -389,7 +391,7 @@ struct argp_state
    routine returned a non-zero value, it is returned; otherwise 0 is
    returned.  This function may also call exit unless the ARGP_NO_HELP flag
    is set.  INPUT is a pointer to a value to be passed in to the parser.  */
-__declspec(dllexport)
+DLLEXPORT
 error_t argp_parse(const struct argp *__restrict argp,
                     int argc, char **__restrict argv,
                     unsigned flags, int *__restrict arg_index,
@@ -406,9 +408,9 @@ error_t __argp_parse(const struct argp *__restrict argp,
    will print this string followed by a newline and exit (unless the
    ARGP_NO_EXIT flag is used).  Overridden by ARGP_PROGRAM_VERSION_HOOK.  */
 #ifdef WIN_ARGP_DLL_COMPILE
-__declspec(dllexport)
+DLLEXPORT
 #else /* WIN_ARGP_DLL_COMPILE */
-__declspec(dllimport)
+DLLIMPORT
 #endif /* WIN_ARGP_DLL_COMPILE */
 extern const char *argp_program_version;
 

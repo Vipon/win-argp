@@ -30,8 +30,10 @@
 #include <stddef.h>
 #include <stdlib.h>
 
+#ifdef _WIN32
 # define strcasecmp _stricmp
 # define strncasecmp _strnicmp
+#endif /* _WIN32 */
 
 extern void *mempcpy (void *__restrict __dest,
                 const void *__restrict __src, size_t __n);

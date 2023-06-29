@@ -27,10 +27,10 @@ ninja install
 ```
 
 ## Support build setup
-| Compliler | Support Status |
-|:----------|:--------------:|
-| MSVC      |  Full Support  |
-| Clang     |  Full Support  |
+|       |  Win32  | Mac Os X |
+|:------|:-------:|:--------:|
+| MSVC  | Support | -------- |
+| Clang | Support | Support  |
 
 ## Cmake setup
 * Change install directory:
