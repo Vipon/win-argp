@@ -31,3 +31,12 @@ ninja install
 |:----------|:--------------:|
 | MSVC      |  Full Support  |
 | Clang     |  Full Support  |
+
+## Cmake setup
+* Change install directory:
+    * -DWIN_ARGP_INSTALL_PREFIX="PATH_TO_INSTALL_DIRECTORY"
+* Change type of result library:
+    * -DWIN_ARGP_LIB_TYPE=[SHARED/STATIC]
+    * Default value SHARED (recomended)
+    * if WIN_ARGP_LIB_TYPE=STATIC -> produce more necessary static libs. You need to link all of them to result program.
+

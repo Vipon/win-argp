@@ -46,3 +46,10 @@ install(
     DESTINATION "${WIN_ARGP_INSTALL_PREFIX}/include"
 )
 
+if (WIN_ARGP_LIB_TYPE STREQUAL "STATIC")
+    install(
+        TARGETS getopt
+        DESTINATION "${WIN_ARGP_INSTALL_PREFIX}/lib"
+    )
+endif ()
+

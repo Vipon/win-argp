@@ -37,3 +37,10 @@ add_library(string_helper STATIC
 
 target_include_directories(string_helper PUBLIC ${CMAKE_CURRENT_LIST_DIR})
 
+if (WIN_ARGP_LIB_TYPE STREQUAL "STATIC")
+    install(
+        TARGETS string_helper
+        DESTINATION "${WIN_ARGP_INSTALL_PREFIX}/lib"
+    )
+endif ()
+
