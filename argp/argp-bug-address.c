@@ -17,6 +17,8 @@
    License along with the GNU C Library; if not, see
    <https://www.gnu.org/licenses/>.  */
 
+#include <argp.h>
+
 /* If set by the user program, it should point to string that is the
    bug-reporting address for the program.  It will be printed by argp_help if
    the ARGP_HELP_BUG_ADDR flag is set (as it is by various standard help

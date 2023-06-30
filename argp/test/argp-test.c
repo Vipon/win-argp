@@ -238,7 +238,6 @@ parse_opt (int key, char *arg, struct argp_state *state)
     return 0;
 }
 
-const char *argp_program_bug_address = "<" PACKAGE_BUGREPORT ">";
 static char doc[] = "documentation string";
 
 struct argp test_argp = {
@@ -451,6 +450,8 @@ int
 main (int argc, char **argv)
 {
     argp_program_version = "test_argp (" PACKAGE_NAME ") " VERSION;
+    argp_program_bug_address = "<" PACKAGE_BUGREPORT ">";
+
     struct argp_child argp_children[3], group1_children[2], group2_children[2];
     test_fp *fun;
 

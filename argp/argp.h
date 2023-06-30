@@ -396,6 +396,7 @@ error_t argp_parse(const struct argp *__restrict argp,
                     int argc, char **__restrict argv,
                     unsigned flags, int *__restrict arg_index,
                     void *__restrict input);
+DLLEXPORT
 error_t __argp_parse(const struct argp *__restrict argp,
                     int argc, char **__restrict argv,
                     unsigned flags, int *__restrict arg_index,
@@ -419,6 +420,7 @@ extern const char *argp_program_version;
    calls this function with a stream to print the version to and a pointer to
    the current parsing state, and then exits (unless the ARGP_NO_EXIT flag is
    used).  This variable takes precedent over ARGP_PROGRAM_VERSION.  */
+DLLEXPORT
 extern void (*argp_program_version_hook)(FILE *__restrict __stream,
                     struct argp_state *__restrict
                     __state);
@@ -428,11 +430,21 @@ extern void (*argp_program_version_hook)(FILE *__restrict __stream,
    argp_help if the ARGP_HELP_BUG_ADDR flag is set (as it is by various
    standard help messages), embedded in a sentence that says something like
    `Report bugs to ADDR.'.  */
+#ifdef WIN_ARGP_DLL_COMPILE
+DLLEXPORT
+#else /* WIN_ARGP_DLL_COMPILE */
+DLLIMPORT
+#endif /* WIN_ARGP_DLL_COMPILE */
 extern const char *argp_program_bug_address;
 
 /* The exit status that argp will use when exiting due to a parsing error.
    If not defined or set by the user program, this defaults to EX_USAGE from
    <sysexits.h>.  */
+#ifdef WIN_ARGP_DLL_COMPILE
+DLLEXPORT
+#else /* WIN_ARGP_DLL_COMPILE */
+DLLIMPORT
+#endif /* WIN_ARGP_DLL_COMPILE */
 extern error_t argp_err_exit_status;
 
 /* Flags for argp_help.  */
@@ -466,9 +478,11 @@ extern error_t argp_err_exit_status;
 
 /* Output a usage message for ARGP to STREAM.  FLAGS are from the set
    ARGP_HELP_*.  */
+DLLEXPORT
 extern void argp_help(const struct argp *__restrict __argp,
                 FILE *__restrict __stream,
                 unsigned __flags, char *__restrict __name);
+DLLEXPORT
 extern void __argp_help(const struct argp *__restrict __argp,
                 FILE *__restrict __stream, unsigned __flags,
                 char *__name);
@@ -483,9 +497,11 @@ extern void __argp_help(const struct argp *__restrict __argp,
 
 /* Output, if appropriate, a usage message for STATE to STREAM.  FLAGS are
    from the set ARGP_HELP_*.  */
+DLLEXPORT
 extern void argp_state_help(const struct argp_state *__restrict __state,
                     FILE *__restrict __stream,
                     unsigned int __flags);
+DLLEXPORT
 extern void __argp_state_help(const struct argp_state *__restrict __state,
                     FILE *__restrict __stream,
                     unsigned int __flags);
@@ -493,8 +509,10 @@ extern void __argp_state_help(const struct argp_state *__restrict __state,
 /* If appropriate, print the printf string FMT and following args, preceded
    by the program name and `:', to stderr, and followed by a `Try ... --help'
    message, then exit (1).  */
+DLLEXPORT
 extern void argp_error(const struct argp_state *__restrict __state,
                 const char *__restrict __fmt, ...);
+DLLEXPORT
 extern void __argp_error(const struct argp_state *__restrict __state,
                 const char *__restrict __fmt, ...);
 
@@ -506,18 +524,22 @@ extern void __argp_error(const struct argp_state *__restrict __state,
    difference between this function and argp_error is that the latter is for
    *parsing errors*, and the former is for other problems that occur during
    parsing but don't reflect a (syntactic) problem with the input.  */
+DLLEXPORT
 extern void argp_failure(const struct argp_state *__restrict __state,
                 int __status, int __errnum,
                 const char *__restrict __fmt, ...);
+DLLEXPORT
 extern void __argp_failure(const struct argp_state *__restrict __state,
                 int __status, int __errnum,
                 const char *__restrict __fmt, ...);
 
 /* Return the input field for ARGP in the parser corresponding to STATE; used
    by the help routines.  */
+DLLEXPORT
 extern void *_argp_input(const struct argp *__restrict __argp,
                 const struct argp_state *__restrict __state)
      __THROW;
+DLLEXPORT
 extern void *__argp_input(const struct argp *__restrict __argp,
                 const struct argp_state *__restrict __state)
      __THROW;
