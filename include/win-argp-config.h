@@ -28,6 +28,7 @@
 #ifdef _WIN32
 # include <io.h>
 # include <stdio.h>
+# include <errno.h>
 # include <stdlib.h>
 # include <Windows.h>
 
