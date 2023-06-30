@@ -66,23 +66,27 @@ int unsetenv(const char *name)
 # define DLLIMPORT
 #endif /* _WIN32 */
 
-#if __GNUC__ >= 3 || (__GNUC__ == 2 && __GNUC_MINOR__ >= 7)
-# define _GL_UNUSED __attribute__ ((__unused__))
+#ifdef __GNUC__
+# if __GNUC__ >= 3 || (__GNUC__ == 2 && __GNUC_MINOR__ >= 7)
+#  define _GL_UNUSED __attribute__ ((__unused__))
+# else
+#  define _GL_UNUSED
+# endif
+# ifndef FALLTHROUGH
+#  if (__GNUC__ >= 7) || (__clang_major__ >= 10)
+#   define FALLTHROUGH __attribute__ ((__fallthrough__))
+#  else
+#   define FALLTHROUGH ((void) 0)
+#  endif
+# endif
 #else
 # define _GL_UNUSED
-#endif
+# define FALLTHROUGH ((void) 0)
+#endif /* __GNUC__ */
 
 /* The name _UNUSED_PARAMETER_ is an earlier spelling, although the name
    is a misnomer outside of parameter lists.  */
 #define _UNUSED_PARAMETER_ _GL_UNUSED
-
-#ifndef FALLTHROUGH
-# if (__GNUC__ >= 7) || (__clang_major__ >= 10)
-#  define FALLTHROUGH __attribute__ ((__fallthrough__))
-# else
-#  define FALLTHROUGH ((void) 0)
-# endif
-#endif
 
 #endif /* __CONFIG_H */
 
