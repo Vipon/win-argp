@@ -38,6 +38,10 @@ endif (NOT WIN_ARGP_LIB_TYPE)
 include(CTest)
 
 include_directories(include)
+install(
+    FILES include/win-argp-config.h
+    DESTINATION "${WIN_ARGP_INSTALL_PREFIX}/include"
+)
 
 add_subdirectory(getopt)
 add_subdirectory(string_helper)

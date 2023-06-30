@@ -16,7 +16,7 @@
 
 /* Written by Bruno Haible <bruno@clisp.org>, 2009.  */
 
-#include <config.h>
+#include "win-argp-config.h"
 
 /* None of the files accessed by this test are large, so disable the
    ftell link warning if we are not using the gnulib ftell module.  */

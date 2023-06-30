@@ -16,7 +16,7 @@
 
 /* Written by Bruno Haible <bruno@clisp.org>, 2009.  */
 
-#include "config.h"
+#include "win-argp-config.h"
 #include "getopt.h"
 
 #include "signature.h"

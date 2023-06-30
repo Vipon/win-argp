@@ -20,7 +20,7 @@
 #ifndef _ARGP_H
 #define _ARGP_H
 
-#include "config.h"
+#include "win-argp-config.h"
 
 #include <stdio.h>
 #include <ctype.h>

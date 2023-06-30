@@ -31,7 +31,7 @@
  * SUCH DAMAGE.
  */
 
-#include "config.h"
+#include "win-argp-config.h"
 
 #include <stdio.h>
 #include <stdlib.h>
